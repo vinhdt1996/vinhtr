@@ -3,21 +3,22 @@ package com.example.vinhexample.viewmodel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.vinhexample.base.BaseViewModel
-import com.example.vinhexample.model.Feed
-import com.example.vinhexample.repository.HomeRepository
+import com.example.vinhexample.model.User
+import com.example.vinhexample.param.LoginDemoParam
+import com.example.vinhexample.repository.LoginDemoRepository
 import com.example.vinhexample.vo.Resource
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: HomeRepository) : BaseViewModel() {
+class LoginDemoViewModel(private val repository: LoginDemoRepository) : BaseViewModel() {
 
-    val feedLiveData = MediatorLiveData<ArrayList<Feed>?>()
+    val loginLiveData = MediatorLiveData<User?>()
 
-    fun getFeeds() {
+    fun login(param: LoginDemoParam) {
         viewModelScope.launch {
-            feedLiveData.addSource(repository.getFeeds()) {
+            loginLiveData.addSource(repository.login(param)) {
                 when (it) {
                     is Resource.Success -> {
-                        feedLiveData.value = it.data
+                        loginLiveData.value = it.data
                     }
                     is Resource.Error -> {
                         networkError.value = Pair(it.message, it.code)

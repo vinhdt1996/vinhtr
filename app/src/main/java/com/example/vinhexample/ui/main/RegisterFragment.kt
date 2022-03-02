@@ -6,8 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vinhexample.R
 import com.example.vinhexample.base.BaseFragment
 import com.example.vinhexample.databinding.FragmentRegisterBinding
-import com.example.vinhexample.ext.isValidEmail
-import com.example.vinhexample.ext.isValidPassword
+import com.example.vinhexample.ext.handleErrorAuth
 import com.example.vinhexample.param.RegisterParam
 import com.example.vinhexample.utils.PopupUtil
 import com.example.vinhexample.viewmodel.RegisterViewModel
@@ -33,13 +32,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), View.OnClickLi
     private fun handleRegister() {
         val email = binding.edtEmail.text.toString().trim()
         val password = binding.edtPassword.text.toString()
-        val error = when {
-            email.isEmpty() -> getString(R.string.err_email_empty)
-            !email.isValidEmail() -> getString(R.string.err_email_invalid)
-            password.isEmpty() -> getString(R.string.err_password_empty)
-            !password.isValidPassword() -> getString(R.string.err_password_invalid)
-            else -> null
-        }
+        val error = context?.handleErrorAuth(email, password)
         error?.let {
             PopupUtil.showPopupError(error)
             return@handleRegister

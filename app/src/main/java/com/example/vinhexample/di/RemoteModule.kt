@@ -31,7 +31,8 @@ fun provideOkHttpClient(): OkHttpClient {
             override fun intercept(chain: Interceptor.Chain): Response {
                 var request = chain.request()
                 val builder = request.newBuilder()
-                val token = MainApplication.instance.user?.access_token
+//                val token = MainApplication.instance.user?.access_token
+                val token = MainApplication.instance.token
                 if (token != null) {
                     builder.header("Authorization", "Bearer $token")
                 }

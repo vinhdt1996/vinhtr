@@ -1,31 +1,28 @@
 package com.example.vinhexample.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vinhexample.model.User
+import com.example.vinhexample.base.BaseViewModel
+import com.example.vinhexample.model.LoginResponse
 import com.example.vinhexample.param.LoginParam
 import com.example.vinhexample.repository.LoginRepository
-import com.example.vinhexample.vo.Resource
+import com.example.vinhexample.vo.ReliaResource
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
+class LoginViewModel(private val repository: LoginRepository) : BaseViewModel() {
 
-    val loginLiveData = MediatorLiveData<User?>()
-
-    val errorLiveData = MutableLiveData<Pair<String, Int?>>()
+    val loginLiveData = MediatorLiveData<LoginResponse?>()
 
     fun login(param: LoginParam) {
         viewModelScope.launch {
-            loginLiveData.addSource(repository.login(param)) {
-                when (it) {
-                    is Resource.Success -> {
-                        loginLiveData.value = it.data
+            loginLiveData.addSource(repository.login(param)) { resource ->
+                when (resource) {
+                    is ReliaResource.Success -> {
+                        resource.data?.let {
+                            loginLiveData.value = it
+                        }
                     }
-                    is Resource.Error -> {
-                        errorLiveData.value = Pair(it.message, it.code)
-                    }
+                    is ReliaResource.Error -> Unit
                 }
             }
         }

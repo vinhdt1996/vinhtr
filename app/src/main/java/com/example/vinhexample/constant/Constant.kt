@@ -18,5 +18,6 @@ object Constant {
 
     object EndPoint {
         const val REGISTER = "register"
+        const val AUTH_LOGIN = "auth/login"
     }
 }

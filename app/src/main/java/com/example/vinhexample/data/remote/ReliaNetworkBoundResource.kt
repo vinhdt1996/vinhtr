@@ -39,6 +39,7 @@ abstract class ReliaNetworkBoundResource<ResponseType>(private val dispatcher: C
         if (apiResponse.isSuccessful) {
             val body = apiResponse.body()
             setValue(ReliaResource.Success(body))
+            PopupUtil.hideAllPopup()
         } else {
             PopupUtil.showPopupError("${apiResponse.message()} (Code: ${apiResponse.code()})")
         }

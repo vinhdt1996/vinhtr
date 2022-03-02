@@ -3,6 +3,7 @@ package com.example.vinhexample.api
 import com.example.vinhexample.constant.Constant
 import com.example.vinhexample.constant.Constant.ITEM_PER_PAGE
 import com.example.vinhexample.model.*
+import com.example.vinhexample.param.LoginDemoParam
 import com.example.vinhexample.param.LoginParam
 import com.example.vinhexample.param.RegisterParam
 import retrofit2.Response
@@ -14,7 +15,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @POST("users-login")
-    suspend fun login(@Body login: LoginParam): Response<ObjectResponse<User>>
+    suspend fun loginDemo(@Body param: LoginDemoParam): Response<ObjectResponse<User>>
 
     @GET("search-user")
     suspend fun getUsers(
@@ -31,4 +32,6 @@ interface ApiService {
     @POST(Constant.EndPoint.REGISTER)
     suspend fun register(@Body param: RegisterParam): Response<RegisterResponse>
 
+    @POST(Constant.EndPoint.AUTH_LOGIN)
+    suspend fun login(@Body param: LoginParam): Response<LoginResponse>
 }

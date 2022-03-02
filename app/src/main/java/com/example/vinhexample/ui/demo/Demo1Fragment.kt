@@ -15,9 +15,9 @@ import com.example.vinhexample.constant.Constant.DEFAULT_FCM_TOKEN
 import com.example.vinhexample.constant.Constant.DEFAULT_PASSWORD
 import com.example.vinhexample.databinding.FragmentDemo1Binding
 import com.example.vinhexample.ext.gone
-import com.example.vinhexample.param.LoginParam
+import com.example.vinhexample.param.LoginDemoParam
 import com.example.vinhexample.utils.PopupUtil
-import com.example.vinhexample.viewmodel.LoginViewModel
+import com.example.vinhexample.viewmodel.LoginDemoViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -29,7 +29,7 @@ class Demo1Fragment : BaseFragment<FragmentDemo1Binding>(), View.OnClickListener
     override val toolbarLayoutId: Int
         get() = R.layout.layout_toolbar
 
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: LoginDemoViewModel by viewModel()
 
     override fun toolbarFunc(curActivity: AppCompatActivity?, toolbar: Toolbar?) {
         toolbar?.run {
@@ -52,7 +52,7 @@ class Demo1Fragment : BaseFragment<FragmentDemo1Binding>(), View.OnClickListener
 //            Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.errorLiveData.observe(this) {
+        viewModel.networkError.observe(this) {
             PopupUtil.showPopupError(it.first)
         }
     }
@@ -64,7 +64,7 @@ class Demo1Fragment : BaseFragment<FragmentDemo1Binding>(), View.OnClickListener
                 findNavController().navigate(action)
             }
             R.id.btnLogin -> {
-                viewModel.login(LoginParam(DEFAULT_EMAIL, DEFAULT_PASSWORD, DEFAULT_FCM_TOKEN))
+                viewModel.login(LoginDemoParam(DEFAULT_EMAIL, DEFAULT_PASSWORD, DEFAULT_FCM_TOKEN))
             }
         }
     }
