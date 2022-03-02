@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragmentDemo1"
+    android:id="@+id/nav_demo">
+
+    <fragment
+        android:id="@+id/fragmentDemo1"
+        android:name="com.example.vinhexample.ui.demo.Demo1Fragment"
+        tools:layout="@layout/fragment_demo_1">
+
+        <action android:id="@+id/actionDemo1ToDemo2"
+            app:destination="@id/fragmentDemo2"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/fragmentDemo2"
+        android:name="com.example.vinhexample.ui.demo.Demo2Fragment"
+        tools:layout="@layout/fragment_demo_2"/>
+
+</navigation>
