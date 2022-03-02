@@ -46,7 +46,7 @@ fun provideOkHttpClient(): OkHttpClient {
 
 fun provideApiService(okHttpClient: OkHttpClient): ApiService {
     val retrofit = Retrofit.Builder()
-        .baseUrl(Constant.BASE_URL)
+        .baseUrl(Constant.RELIA_BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

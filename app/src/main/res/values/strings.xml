@@ -13,5 +13,9 @@
     <string name="add_product">Add Product</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
+    <string name="err_email_empty">Please enter your email address</string>
+    <string name="err_password_empty">Please enter your password</string>
+    <string name="err_email_invalid">Please enter a valid email address</string>
+    <string name="err_password_invalid">Password must have at least 6 characters</string>
 
 </resources>

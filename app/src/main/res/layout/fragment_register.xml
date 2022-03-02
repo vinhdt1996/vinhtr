@@ -59,6 +59,7 @@
             android:layout_marginStart="@dimen/space_xlarge"
             android:layout_marginTop="@dimen/space_normal"
             android:layout_marginEnd="@dimen/space_xlarge"
+            android:onClick="@{fragment::onClick}"
             android:background="@drawable/bg_button_login"
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
